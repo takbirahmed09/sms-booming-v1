@@ -4,7 +4,7 @@ from getpass import getpass
 from twilio.rest import Client
 
 # Banner
-banner = """
+banner = r"""
 __________  ______   ______   ______   ______   _________  ______   ______
 \      \ /\  __ \ /\  __ \ /\  __ \ /\  __ \ /\___   /\ /\  __ \ /\  ___ \
  \      \ \  __ \ \  __ \ \  __ \ \  __ \ \  __ \ \  __ \ \ \  __ \ \  __ \
